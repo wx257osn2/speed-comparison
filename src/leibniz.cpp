@@ -1,11 +1,9 @@
 #include <cstdio>
 #include <cstdlib>
 
-unsigned rounds;
-double pi = 1.0;
-
 int main()
 {
+    unsigned rounds;
     const auto infile = std::fopen("rounds.txt", "r");    // open file
     if (infile == NULL) {
         std::perror("open file");
@@ -18,6 +16,8 @@ int main()
     std::fclose(infile);                            // close file
     
     rounds += 2u; // do this outside the loop
+    
+    double pi = 1.0;
     
     for (unsigned i=2u ; i < rounds ; ++i) // use ++i instead of i++
     {
