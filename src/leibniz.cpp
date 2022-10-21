@@ -6,7 +6,7 @@ double pi = 1.0;
 
 int main()
 {
-    auto infile = std::fopen("rounds.txt", "r");    // open file
+    const auto infile = std::fopen("rounds.txt", "r");    // open file
     if (infile == NULL) {
         std::perror("open file");
         return EXIT_FAILURE;
@@ -21,7 +21,7 @@ int main()
     
     for (unsigned i=2u ; i < rounds ; ++i) // use ++i instead of i++
     {
-        double x = -1.0 + 2.0 * (i & 0x1); // allows vectorization
+        const double x = -1.0 + 2.0 * (i & 0x1); // allows vectorization
         pi += (x / (2u * i - 1u)); // double / unsigned = double
     }
     
