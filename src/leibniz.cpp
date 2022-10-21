@@ -27,5 +27,4 @@ int main()
     
     pi *= 4;
     std::printf("%.16f\n", pi); // print 16 decimal digits of pi
-    return EXIT_SUCCESS;
 }
