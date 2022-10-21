@@ -8,11 +8,11 @@ int main()
 {
     auto infile = std::fopen("rounds.txt", "r");    // open file
     if (infile == NULL) {
-        perror("open file");
+        std::perror("open file");
         return EXIT_FAILURE;
     }
     if (std::fscanf(infile, "%u", &rounds) != 1) {  // read from file
-        perror("read file");
+        std::perror("read file");
         return EXIT_FAILURE;
     }
     std::fclose(infile);                            // close file
