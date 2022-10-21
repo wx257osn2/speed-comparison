@@ -105,12 +105,15 @@ clj-bb:
   DO +BENCH --name="clj-bb" --lang="Clojure (Babashka)" --version="bb --version" --cmd="bb -f leibniz.clj"
 
 cpp:
-  FROM +alpine
-  RUN apk add --no-cache gcc build-base
+  FROM ubuntu:latest
+  RUN apt-get update && apt-get install -y g++-12 wget
+  DO +HYPERFINE_DEBIAN
+  COPY +build/scmeta ./
 
+  COPY ./src/rounds.txt ./
   COPY ./src/leibniz.cpp ./
-  RUN --no-cache g++ -std=c++20 leibniz.cpp -o leibniz -Wall -Wextra -pedantic-errors -O3 -s -static -flto -march=native -mtune=native -fomit-frame-pointer -fno-signed-zeros -fno-trapping-math -fassociative-math -ffast-math
-  DO +BENCH --name="cpp" --lang="C++ (g++)" --version="g++ --version" --cmd="./leibniz"
+  RUN --no-cache g++-12 -std=c++20 leibniz.cpp -o leibniz -Wall -Wextra -pedantic-errors -O3 -s -static -flto -march=native -mtune=native -fomit-frame-pointer -fno-signed-zeros -fno-trapping-math -fassociative-math -ffast-math
+  DO +BENCH --name="cpp" --lang="C++ (g++)" --version="g++-12 --version" --cmd="./leibniz"
 
 crystal:
   FROM crystallang/crystal:1.6-alpine
