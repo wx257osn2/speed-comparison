@@ -25,6 +25,6 @@ int main()
         pi += (x / (2u * i - 1u)); // double / unsigned = double
     }
     
-    pi *= 4;
+    pi *= 4.;
     std::printf("%.16f\n", pi); // print 16 decimal digits of pi
 }
