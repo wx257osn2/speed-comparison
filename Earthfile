@@ -109,7 +109,7 @@ cpp:
   RUN apk add --no-cache gcc build-base
 
   COPY ./src/leibniz.cpp ./
-  RUN --no-cache g++ leibniz.cpp -o leibniz -O3 -s -static -flto -march=native -mtune=native -fomit-frame-pointer -fno-signed-zeros -fno-trapping-math -fassociative-math
+  RUN --no-cache g++ -std=c++20 leibniz.cpp -o leibniz -Wall -Wextra -pedantic-errors -O3 -s -static -flto -march=native -mtune=native -fomit-frame-pointer -fno-signed-zeros -fno-trapping-math -fassociative-math -ffast-math
   DO +BENCH --name="cpp" --lang="C++ (g++)" --version="g++ --version" --cmd="./leibniz"
 
 crystal:
